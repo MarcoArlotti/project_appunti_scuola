@@ -49,7 +49,3 @@ Per uno studente, lo stack più bilanciato è solitamente il **LAMP/WAMP** (PHP)
 
 Se vuoi rendere il progetto più professionale, potresti aggiungere:
 - **Sistema di Valutazione:** Gli utenti possono dare da 1 a 5 stelle agli appunti.
----
-
-### Suggerimento per lo sviluppo:
-Inizia creando un database semplice e una pagina di login. Una volta che l'utente è autenticato, lavora sul modulo di "Upload" dell'appunto. Vuoi procedere con la definizione della struttura delle tabelle del database (SQL) o preferisci vedere una bozza dell'interfaccia?
