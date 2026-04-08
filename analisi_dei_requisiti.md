@@ -1,7 +1,5 @@
-# Project FILMAKER
-Il compratore e' una casa cinematrografica che produce film,
-creare una web app che mostri i progetti piu' recenti e parli del registra,
-
-la pagina principale avra' una owerwiew della casa cinematografica poi parlera' del registra e infine
-in fondo parlera' dei suoi film (mettere immagini che scorrano automaticamente).
-
+# appunti per scuola
+Questo porgetto mira a creare una web app che contiene delle pagine fatte html da utenti,
+che contengono appunti per ogni materia.
+con un accesso gli utenti pubblicano le pagine.
+usare un database per gli utenti.
