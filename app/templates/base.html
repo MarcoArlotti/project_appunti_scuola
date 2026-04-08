@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Appunti</title>
+</head>
+<body>
+    <nav>
+        <a href="/">Home</a>
+        <!-- da mettere il controllo della utenticazione -->
+        {% if true %}
+            <a href="/">Dashboard</a>
+            <a href="/utente/1">mostra user</a>
+            <a href="/">Logout</a>
+        {% else %}
+            <a href="/">Login</a>
+            <a href="/">Registrati</a>
+        {% endif %}
+    </nav>
+    <hr>
+
+    {% block content %}{% endblock %}
+</body>
+</html>

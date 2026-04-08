@@ -25,3 +25,10 @@ CREATE TABLE ratings (
 
     UNIQUE(user_id, note_id) -- un utente vota una sola volta
 );
+
+INSERT INTO users (username, email, password_hash)
+VALUES 
+    ('mario_rossi', 'mario.rossi@example.com', 'hashed_password_1'),
+    ('giulia_bianchi', 'giulia.bianchi@example.com', 'hashed_password_2'),
+    ('lucas_verde', 'lucas.verde@example.com', 'hashed_password_3'),
+    ('anna_gialli', 'anna.gialli@example.com', 'hashed_password_4');
