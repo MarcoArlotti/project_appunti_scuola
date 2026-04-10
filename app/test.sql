@@ -1,3 +1,4 @@
+-- database: :memory:
 DROP TABLE IF EXISTS ratings;
 DROP TABLE IF EXISTS subjects;
 DROP TABLE IF EXISTS students;
@@ -59,4 +60,7 @@ VALUES
     ("INFORMATICA");
 
 INSERT INTO notes (text_data, title, data_upload, student_id, subject_id)
-VALUES ('Appunti di matematica','gasa', 2026-04-10, 1, 1);
+VALUES 
+('Appunti di matematica1','gasa1', 2026-04-10, 1, 1),
+('Appunti di matematica2','gasa2', 2026-04-12, 1, 1),
+('Appunti di matematica3','gasa3', 2026-04-13, 2, 1);

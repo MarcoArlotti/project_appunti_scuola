@@ -30,7 +30,7 @@ def get_notes_by_subject(id):
     db = get_db()
     query = """SELECT * FROM notes
                 JOIN subjects ON notes.subject_id = subjects.id 
-                JOIN students ON notes.student_id = students.id WHERE subject_id = ?"""
+                JOIN students ON notes.student_id = students.id WHERE subject_id = ?;"""
     notes = db.execute(query, (id,)).fetchall()
     return [dict(note) for note in notes]
 
