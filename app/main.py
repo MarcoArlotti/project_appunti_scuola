@@ -11,9 +11,3 @@ def index():
 def notes_by_subject(id):
     notes = get_notes_by_subject(id)
     return render_template("notes.html", notes=notes)
-
-@bp.route("/utente/<int:id>")
-def user(id):
-    user = user_by_id(id)
-    print(user)
-    return render_template("utente.html", user=user)
