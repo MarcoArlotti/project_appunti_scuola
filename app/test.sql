@@ -1,5 +1,23 @@
+DROP TABLE IF EXISTS ratings;
+DROP TABLE IF EXISTS subjects;
+DROP TABLE IF EXISTS students;
+DROP TABLE IF EXISTS notes;
+
+-- tabella appunti
+CREATE TABLE notes (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    text_data VARCHAR(255),
+    title VARCHAR(255),
+    data_upload DATETIME,
+    student_id INT,
+    subject_id INT,
+    FOREIGN KEY (student_id) REFERENCES students(id),
+    FOREIGN KEY (subject_id) REFERENCES subjects(id)
+);
+
 -- Creazione tabella utenti
-CREATE TABLE users (
+-- cambiare come funziona la password
+CREATE TABLE students (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
     username VARCHAR(100) NOT NULL UNIQUE,
     email VARCHAR(150) NOT NULL UNIQUE,
@@ -26,9 +44,19 @@ CREATE TABLE ratings (
     UNIQUE(user_id, note_id) -- un utente vota una sola volta
 );
 
-INSERT INTO users (username, email, password_hash)
+INSERT INTO students (username, email, password_hash)
 VALUES 
     ('mario_rossi', 'mario.rossi@example.com', 'hashed_password_1'),
     ('giulia_bianchi', 'giulia.bianchi@example.com', 'hashed_password_2'),
     ('lucas_verde', 'lucas.verde@example.com', 'hashed_password_3'),
     ('anna_gialli', 'anna.gialli@example.com', 'hashed_password_4');
+
+INSERT INTO subjects (nome_materia)
+VALUES
+    ("GPOI"),
+    ("INGLESE"),
+    ("SISTEMI E RETI"),
+    ("INFORMATICA");
+
+INSERT INTO notes (text_data, title, data_upload, student_id, subject_id)
+VALUES ('Appunti di matematica','gasa', 2026-04-10, 1, 1);

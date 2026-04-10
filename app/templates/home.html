@@ -2,4 +2,11 @@
 
 {% block content %}
 <h1>Home</h1>
+
+{% for subject in subjects %}
+    <a href="{{ url_for('main.notes_by_subject', id=subject['id']) }}">
+    {{ subject['nome_materia'] }}
+    </a>
+{% endfor %}
+
 {% endblock %}

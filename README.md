@@ -50,7 +50,7 @@ Una volta che si ha premuto sull'appunto, verra' mostrato il contenuto (_sperime
 ---
 
 ## schema ER delle relazioni
-
+# TODO modificare le tabelle che non coincidono piu'
 ```mermaid
 erDiagram
       student {
@@ -82,7 +82,7 @@ erDiagram
          int subject_id FK
       }
       
-      student ||--o{ notes : crea
+      student ||--o{ note : crea
       note ||--|| subject : catalogato_tramite
       note ||--o{ rating : ha
 ```

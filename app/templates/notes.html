@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h1>Notes for <i>{{ notes[0].nome_materia}}</i></h1>
+
+{% for note in notes %}
+    <div>
+        {{ note.username }}
+        {{ note.title }}
+        {{ note.data_upload }}
+    </div>
+
+{% endfor %}
+
+{% endblock %}
