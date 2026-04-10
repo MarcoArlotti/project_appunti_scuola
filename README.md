@@ -34,6 +34,21 @@ Una volta che si ha premuto sull'appunto, verra' mostrato il contenuto (_sperime
 
 ---
 
+## Percorsi del sito
+`/` la home,
+
+`/subjects` pagina delle materie,
+
+`/subjects/<int:id>` pagina di tutti gli appunti di una materia specifica,
+
+`/note/<int:id>` pagina di un appunto specifico,
+
+`/students` pagina con tutti gli user,
+
+`/students/<int:id>` pagina di uno studente specifico.
+
+---
+
 ## schema ER delle relazioni
 
 ```mermaid
