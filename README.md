@@ -53,38 +53,38 @@ Una volta che si ha premuto sull'appunto, verra' mostrato il contenuto (_sperime
 # TODO modificare le tabelle che non coincidono piu'
 ```mermaid
 erDiagram
-      student {
+      students {
         int id PK
-        string nome
+        string username
         string email
         string password_hash
-        datetime data_creazione
+        datetime data_iscrizione
       }
 
-      note {
+      notes {
          int id PK
-         string value
+         string text_data
+         string title
          datetime data_upload
          int student_id FK
          int subject_id FK
       }
 
-      subject {
+      subjects {
          int id PK
-         string name
+         string nome_materia
       }
 
-      rating {
+      ratings {
          int id PK
-         int value
-         datetime data_upload
-         int student_id FK
-         int subject_id FK
+         int voto
+         int user_id FK
+         int note_id FK
       }
       
-      student ||--o{ note : crea
-      note ||--|| subject : catalogato_tramite
-      note ||--o{ rating : ha
+      students ||--o{ notes : crea
+      notes ||--|| subjects : catalogato_tramite
+      notes ||--o{ ratings : ha
 ```
 
 ## Glossario dei termini

@@ -2,20 +2,27 @@
 <html>
 <head>
     <title>Appunti</title>
+    <style>
+    div {
+        border: 2px solid #aa00ff;
+        margin-bottom: 10px;
+        }
+    </style>
 </head>
 <body>
-    <nav>
+        <div>
         <a href="/">Home</a>
         <!-- da mettere il controllo della utenticazione -->
         {% if true %}
+        
             <a href="/">Dashboard</a>
-            <a href="/utente/1">mostra user</a>
+            <a href="/students">mostra studenti</a>
             <a href="/">Logout</a>
         {% else %}
             <a href="/">Login</a>
             <a href="/">Registrati</a>
         {% endif %}
-    </nav>
+        </div>
     <hr>
 
     {% block content %}{% endblock %}

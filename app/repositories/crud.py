@@ -20,6 +20,12 @@ def ottieni_dati():
     dati = db.execute(query).fetchall()
     return [dict(dato) for dato in dati]
 
+def get_all_students():
+    db = get_db()
+    query = """SELECT * FROM students"""
+    dati = db.execute(query).fetchall()
+    return [dict(dato) for dato in dati]
+
 def get_subjects():
     db = get_db()
     query = "SELECT * FROM subjects"
