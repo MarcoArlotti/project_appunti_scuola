@@ -5,7 +5,7 @@
 
 {% for note in notes %}
     <div>
-        {{ note.username }}<br>
+        <a href="{{ url_for('main.specific_student', id=note.id) }}">{{note.username}}</a><br><br>
         {{ note.title }}<br>
         {{ note.data_upload }}<br>
     </div>

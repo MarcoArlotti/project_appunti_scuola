@@ -4,7 +4,7 @@
 {% if students %}
     {% for student in students %}
     <div>
-        student name: {{ student.username }} <br>
+        <a href="{{ url_for('main.specific_student', id=student.id) }}">{{student.username}}</a><br>
 
         data iscrizione: {{ student.data_iscrizione }}
     </div>

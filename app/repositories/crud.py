@@ -42,7 +42,7 @@ def get_notes_by_subject(id):
 
 def user_by_id(id):
     db = get_db()
-    query = """SELECT * FROM users WHERE id = ?"""
+    query = """SELECT * FROM students WHERE id = ?"""
     dati = db.execute(query, (id,)).fetchone()
     return dati
 
@@ -56,3 +56,12 @@ def aggiorna(id,nuovo_valore):
     
     db.execute(query, (nuovo_valore, id))
     db.commit()
+
+
+def converti_e_prendi_text_data(id):
+    db = get_db(id)
+    query = """SELECT * FROM notes
+                WHERE notes.id = ?;"""
+    notes = db.execute(query, (id,)).fetchone()
+    pagina_html = notes
+    return pagina_html

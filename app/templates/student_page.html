@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+
+{% block content %}
+{% if student %}
+    <div>
+        student name: {{ student.username }} <br>
+        data iscrizione: {{ student.data_iscrizione }}
+    </div>
+{% else %}
+    <h1>studente non trovato 404</h1>
+{%endif%}
+{% endblock %}
