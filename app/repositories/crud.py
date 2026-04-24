@@ -1,5 +1,5 @@
 from app.db import get_db
-
+import markdown
 def crea(dato1:str):
     db = get_db()
     db.execute(
@@ -59,9 +59,12 @@ def aggiorna(id,nuovo_valore):
 
 
 def converti_e_prendi_text_data(id):
-    db = get_db(id)
+    db = get_db()
     query = """SELECT * FROM notes
                 WHERE notes.id = ?;"""
-    notes = db.execute(query, (id,)).fetchone()
-    pagina_html = notes
-    return pagina_html
+    note_query = db.execute(query, (id,)).fetchone()
+    note = dict(note_query)
+    pagina = note["title"]
+    pagina_html = markdown.markdown(pagina, extensions=['fenced_code', 'tables'])
+    note["text_data"] = pagina_html
+    return note

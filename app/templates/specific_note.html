@@ -1,5 +1,7 @@
 {% extends 'base.html' %}
 
 {% block content %}
-
+<h1>{{ pagina_html.title}}<br></h1>
+<hr>
+{{ pagina_html.text_data | safe}}
 {% endblock %}
