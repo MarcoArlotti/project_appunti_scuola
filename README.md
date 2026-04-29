@@ -93,7 +93,7 @@ flowchart LR
     UC2 -- include --> UC1
     UC5 -- include --> UC1
     %% ereditarieta'
-    user --|> visitatore
+    user --> visitatore
 ```
 
 ## Glossario dei termini
