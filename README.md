@@ -12,7 +12,13 @@ dove noi compagni ci scambiamo informazioni e appunti,
 
 ---
 
+## User stories
+Come visitatore posso accedere per poter pubblicare i miei appunti.
+Come visitatore posso vedere gli appunti degli altri.
+Come visitatore posso scaricare gli appunti degli altri utenti.
+
 ## struttura del progetto
+
 ### HOME PAGE
 Di funzioni base si vuole creare una web app che contenga una home page con una lista di materie.
 
@@ -25,12 +31,17 @@ Nella pagina degli appunti ci sara' mostrato solo il titolo e chi lo ha postato 
 ### PAGINA DI UN APPUNTO
 Una volta che si ha premuto sull'appunto, verra' mostrato il contenuto (_sperimentale_: convertire gli .md in html automaticamente dopo la pubblicazione).
 ---
-## OBBIETTIVI GENERALI
+## OBBIETTIVI GENERALI e Requisiti funzionali
 - Permettere a un utente di registrarsi e autenticarsi,
 - Consentire la creazione, modifica, eliminazione e visualizzazione degli appunti,
 - Consentire la ricerca e il filtro delle materie (in caso anche nella pagina di tutti gli appunti),
 - Fornire una pagina di profilo dove l'utente vede i propri appunti,
 - Permettere a chiunque di scaricare gli appunti o stamparli.
+
+## Requisiti non funzionali 
+- il sito deve usare flask come back-end
+- mysql deve essere come db per salvare i dati
+- il db salva le note convertendole in testo (essendo inviate come tale o come md) che poi verra' convertito in una pagina html ogni volta che lo si deve visualizzare.
 
 ---
 
@@ -47,7 +58,80 @@ Una volta che si ha premuto sull'appunto, verra' mostrato il contenuto (_sperime
 
 `/students/<int:id>` pagina di uno studente specifico.
 
+`/upload_note` pagina per caricare una nuova nota
+
+`/login` accedi
+
+`/sing_in` crea account
+
 ---
+## Casi d'uso
+```mermaid
+flowchart LR
+    user
+    visitatore
+    
+    
+    subgraph Sistema ["Arlo online raccolta appunti"]
+        UC1[("registrazione/login")]
+        UC2[("creazione e modifica delle note")]
+        UC3[("visione delle note")]
+        UC4[("visione degli utenti")]
+        UC5[("modifica del profilo")]
+    end
+
+    %% Relazioni
+    visitatore --- UC1
+    visitatore --- UC3
+    visitatore --- UC4
+    user --- UC2
+    user --- UC5
+
+    
+
+    %% Relazioni (stile dipendenza)
+    UC2 -- include --> UC1
+    UC5 -- include --> UC1
+    %% ereditarieta'
+    user --|> visitatore
+```
+
+## Glossario dei termini
+`student`: sono gli studenti che hanno fatto l'accesso,
+
+`note`: e' le informazioni sul file che e' stato creato dallo `student` e contiene anche il file dentro a value,
+
+`subject`: e' la materia e funge da filtro nella ricerca e ordinamento degli appunti,
+
+`rating`: e' una valutazione da 1 a 5 di quanto e' affidabile e robusto un appunto.
+
+`visitatore`: persona che entra nel sito senza fare l'accesso.
+
+---
+
+## Schedule del lavoro sul progetto
+```mermaid
+gantt
+    dateFormat  MM-DD
+    title schedule del lavoro sul progetto
+
+    section BACKEND + HTML
+    home page :a1, 04-22, 2d
+    pagina delle materie :a2, after a1, 2d
+    pagina di un appunto specifico :b1, after a2, 2d
+    pagina di un utente specifico :c1, after b1, 2d
+
+    section gestione DB
+    CRUD :b2, after c1, 3d
+    Filtri/ricerca :b3, after b2, 4d
+    autenticazione + account admin :b4, after b3, 7d
+    creazione di un appunto :b5, after b4, 7d
+
+    section POLISHING
+    del CSS :c2, after b5, 7d
+    Test e controlli di errori :c3, after c2, 3d
+    Consegna su GitHub :c4, after c3, 1d
+```
 
 ## schema ER delle relazioni
 # TODO modificare le tabelle che non coincidono piu'
@@ -85,39 +169,4 @@ erDiagram
       students ||--o{ notes : crea
       notes ||--|| subjects : catalogato_tramite
       notes ||--o{ ratings : ha
-```
-
-## Glossario dei termini
-`student`: sono gli studenti che hanno fatto l'accesso,
-
-`note`: e' le informazioni sul file che e' stato creato dallo `student` e contiene anche il file dentro a value,
-
-`subject`: e' la materia e funge da filtro nella ricerca e ordinamento degli appunti,
-
-`rating`: e' una valutazione da 1 a 5 di quanto e' affidabile e robusto un appunto.
-
----
-
-## Schedule del lavoro sul progetto
-```mermaid
-gantt
-    dateFormat  MM-DD
-    title schedule del lavoro sul progetto
-
-    section BACKEND + HTML
-    home page :a1, 04-22, 2d
-    pagina delle materie :a2, after a1, 2d
-    pagina di un appunto specifico :b1, after a2, 2d
-    pagina di un utente specifico :c1, after b1, 2d
-
-    section gestione DB
-    CRUD :b2, after c1, 3d
-    Filtri/ricerca :b3, after b2, 4d
-    autenticazione + account admin :b4, after b3, 7d
-    creazione di un appunto :b5, after b4, 7d
-
-    section POLISHING
-    del CSS :c2, after b5, 7d
-    Test e controlli di errori :c3, after c2, 3d
-    Consegna su GitHub :c4, after c3, 1d
 ```
