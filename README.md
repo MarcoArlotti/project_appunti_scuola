@@ -68,16 +68,20 @@ Una volta che si ha premuto sull'appunto, verra' mostrato il contenuto (_sperime
 ## Casi d'uso
 ```mermaid
 flowchart LR
-    user
-    visitatore
+
+    subgraph Actors ["Actors"]
+      user((user))
+      visitatore((visitatore))
+    end
     
-    
-    subgraph Sistema ["Arlo online raccolta appunti"]
-        UC1[("registrazione/login")]
-        UC2[("creazione e modifica delle note")]
-        UC3[("visione delle note")]
-        UC4[("visione degli utenti")]
-        UC5[("modifica del profilo")]
+    subgraph Sistema ["sistema online raccolta appunti"]
+        UC1("registrazione/login")
+        UC2("creazione e modifica delle note")
+        UC3("vedi lista note")
+        UW3("vedi nota specifica")
+        UC4("vedi lista utenti")
+        UW4("vedi profilo di un utente")
+        UC5("modifica del profilo")
     end
 
     %% Relazioni
@@ -86,12 +90,14 @@ flowchart LR
     visitatore --- UC4
     user --- UC2
     user --- UC5
-
     
 
     %% Relazioni (stile dipendenza)
     UC2 -- include --> UC1
     UC5 -- include --> UC1
+    UC3 -- extend --> UW3
+    UC4 -- extend --> UW4
+
     %% ereditarieta'
     user --> visitatore
 ```
