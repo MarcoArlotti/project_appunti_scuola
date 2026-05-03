@@ -10,7 +10,15 @@ Creando una web app che si salvi automaticamente i vari appunti anche di altre p
 
 dove noi compagni ci scambiamo informazioni e appunti,
 
+### cosa migliora
+La web app in automatico convertira' i vari tipi di documenti in pagine web leggibili comodamente dal browser
+
 ---
+
+## Attori principali
+Il `visitatore` che e' quella persona che visita il sito senza effettuare l'accesso.
+
+l'utente che ha fatto l'accesso detto anche `studente`.
 
 ## User stories
 Come visitatore posso accedere per poter pubblicare i miei appunti.
@@ -30,6 +38,7 @@ Nella pagina degli appunti ci sara' mostrato solo il titolo e chi lo ha postato 
 
 ### PAGINA DI UN APPUNTO
 Una volta che si ha premuto sull'appunto, verra' mostrato il contenuto (_sperimentale_: convertire gli .md in html automaticamente dopo la pubblicazione).
+
 ---
 ## OBBIETTIVI GENERALI e Requisiti funzionali
 - Permettere a un utente di registrarsi e autenticarsi,
