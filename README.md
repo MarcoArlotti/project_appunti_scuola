@@ -1,12 +1,12 @@
 # appunti per scuola
-Il progetto project_appunti_scuola nasce dal risolvere il problema di avere unn problema di sincronizzazzione tra i miei vari dispositivi.
+Il progetto project_appunti_scuola nasce dal risolvere il problema di avere un problema di sincronizzazzione tra i miei vari dispositivi.
 
 ### Il problema
 Quando mi ritrovo a scuola, prendo degli appunti via file .md e li carico nel mio repository in modo tale che quando torno a casa,
 
-io possa modificarli velocemenete usando il mio PC fisso.
+io possa modificarli velocemente usando il mio PC fisso.
 
-Creando una web app che si salvi automaticamente i vari appunti anche di altre persone, si evita di dover andare a prendere manualmene dalla piattaforma Discord,
+Creando una web app che si salvi automaticamente i vari appunti anche di altre persone, si evita di dover andare a prendere manualmente dalla piattaforma Discord,
 
 dove noi compagni ci scambiamo informazioni e appunti,
 
@@ -32,7 +32,7 @@ Di funzioni base si vuole creare una web app che contenga una home page con una 
 
 
 ### PAGINA DI UNA SPECIFICA MATERIA
-Una volta premuto sulla materia, si spostera' l'utente in un altra pagina che faccia vedere gli appunti di quella materia ordinati per la data di pubblicazione (_sperimentale_: tramite il numero della unita' del libro).
+Una volta premuto sulla materia, si spostera' l'utente in un'altra pagina che faccia vedere gli appunti di quella materia ordinati per la data di pubblicazione (_sperimentale_: tramite il numero della unita' del libro).
 
 Nella pagina degli appunti ci sara' mostrato solo il titolo e chi lo ha postato e la data (_sperimentale_: gli appunti hanno un rating da 1 a 5, quindi mostrare la media e quante recensioni si hanno fatto).
 
@@ -40,14 +40,14 @@ Nella pagina degli appunti ci sara' mostrato solo il titolo e chi lo ha postato 
 Una volta che si ha premuto sull'appunto, verra' mostrato il contenuto (_sperimentale_: convertire gli .md in html automaticamente dopo la pubblicazione).
 
 ---
-## OBBIETTIVI GENERALI e Requisiti funzionali
+## OBBIETTIVI GENERALI e Requisiti Funzionali
 - Permettere a un utente di registrarsi e autenticarsi,
 - Consentire la creazione, modifica, eliminazione e visualizzazione degli appunti,
 - Consentire la ricerca e il filtro delle materie (in caso anche nella pagina di tutti gli appunti),
 - Fornire una pagina di profilo dove l'utente vede i propri appunti,
 - Permettere a chiunque di scaricare gli appunti o stamparli.
 
-## Requisiti non funzionali 
+## Requisiti non Funzionali 
 - il sito deve usare flask come back-end
 - mysql deve essere come db per salvare i dati
 - il db salva le note convertendole in testo (essendo inviate come tale o come md) che poi verra' convertito in una pagina html ogni volta che lo si deve visualizzare.
@@ -71,7 +71,7 @@ Una volta che si ha premuto sull'appunto, verra' mostrato il contenuto (_sperime
 
 `/login` accedi
 
-`/sing_in` crea account
+`/sign_in` crea account
 
 ---
 ## Casi d'uso
@@ -114,7 +114,7 @@ flowchart LR
 ## Glossario dei termini
 `student`: sono gli studenti che hanno fatto l'accesso,
 
-`note`: e' le informazioni sul file che e' stato creato dallo `student` e contiene anche il file dentro a value,
+`note`: e' l'informazioni sul file che e' stato creato dallo `student` e contiene anche il file dentro a value,
 
 `subject`: e' la materia e funge da filtro nella ricerca e ordinamento degli appunti,
 
@@ -182,6 +182,6 @@ erDiagram
       }
       
       students ||--o{ notes : crea
-      notes ||--|| subjects : catalogato_tramite
+      notes ||--|{ subjects : catalogato_tramite
       notes ||--o{ ratings : ha
 ```
