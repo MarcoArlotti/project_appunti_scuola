@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<h1>SIGN</h1>
+<form>
+    <label for="username">Username:</label>
+    <br>
+    <input type="text" id="username" name="username">
+    <br>
+    <label for="password">Password:</label>
+    <br>
+    <input type="password" id="password" name="username" minlength="6" maxlength="50">
+    <br>
+    <label for="email">email:</label>
+    <br>
+    <input type="text" id="email" name="email">
+    <br>
+
+    <button id="invia">accedi</button>
+    
+</form>
+
+{% endblock %}

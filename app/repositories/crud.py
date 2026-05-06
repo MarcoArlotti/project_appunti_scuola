@@ -68,3 +68,16 @@ def converti_e_prendi_text_data(id):
     pagina_html = markdown.markdown(pagina, extensions=['fenced_code', 'tables'])
     note["text_data"] = pagina_html
     return note
+
+from flask_login import UserMixin
+from werkzeug.security import generate_password_hash, check_password_hash
+
+def crea_account(username, email, password):
+    db = get_db()
+
+    password_cifrato = generate_password_hash(password)
+
+    db.execute(
+        "INSERT INTO students (username, email, password) VALUES (?,?,?)",
+        (username, email, password_cifrato)
+    )

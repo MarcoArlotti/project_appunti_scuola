@@ -26,3 +26,23 @@ def notes_by_subject(id):
 def specific_note(id):
     pagina_html = converti_e_prendi_text_data(id)
     return render_template("specific_note.html", pagina_html=pagina_html)
+
+@bp.route("/sign",methods=["GET", "POST"])
+def sign():
+    if request.method == "GET":
+        return render_template("sign.html")
+    
+    if request.method == "POST":
+        username = request.form.get('username')
+        email = request.form.get('email')
+        password = request.form.get('password')
+
+        print(username,password,email)
+        crea_account(username,email,password)
+        #NON VA
+    return render_template("sign.html")
+
+@bp.route("/login")
+def login():
+    #controlla_accesso()
+    return render_template("login.html")
