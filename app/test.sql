@@ -7,8 +7,8 @@ DROP TABLE IF EXISTS notes;
 -- tabella appunti
 CREATE TABLE notes (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
-    text_data VARCHAR(255),
-    title VARCHAR(255),
+    text_data TEXT,
+    title TEXT,
     data_upload DATETIME,
     student_id INT,
     subject_id INT,
@@ -21,8 +21,8 @@ CREATE TABLE notes (
 CREATE TABLE students (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
     username VARCHAR(100) NOT NULL UNIQUE,
-    email VARCHAR(150) NOT NULL UNIQUE,
-    password_hash VARCHAR(200) NOT NULL,
+    email VARCHAR(30) NOT NULL UNIQUE,
+    password_hash VARCHAR(255) NOT NULL,
     data_iscrizione DATETIME DEFAULT CURRENT_TIMESTAMP
 );
 

@@ -77,7 +77,16 @@ def crea_account(username, email, password):
 
     password_cifrato = generate_password_hash(password)
 
+    print(f"USERNAME{username}, EMAIL{email}, PASSWORD{password_cifrato}")
+
     db.execute(
-        "INSERT INTO students (username, email, password) VALUES (?,?,?)",
+        "INSERT INTO students (username, email, password_hash) VALUES (?,?,?)",
         (username, email, password_cifrato)
     )
+    db.commit()
+
+
+def controlla_accesso(username,password_hashed):
+    #STEP 1 controlla se l'account esiste
+    #STEP 2 controlla password guardando se l'account con quel id o nome ha quella password
+    pass

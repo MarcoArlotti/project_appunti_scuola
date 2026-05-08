@@ -4,25 +4,25 @@
     <title>Appunti</title>
     <style>
     div {
-        border: 2px solid #aa00ff;
+        border: 1px solid #aa00ff;
         margin-bottom: 10px;
-        }
+    }
     </style>
 </head>
 <body>
-        <div>
-        <a href="/">Home</a>
-        <!-- da mettere il controllo della utenticazione -->
-        {% if true %}
-        
-            <a href="/">Dashboard</a>
-            <a href="/students">mostra studenti</a>
-            <a href="/">Logout</a>
-        {% else %}
-            <a href="/">Login</a>
-            <a href="/">Registrati</a>
-        {% endif %}
-        </div>
+    <div>
+        <a href="{{ url_for('main.index') }}">Home</a>
+
+        <!-- da mettere il controllo della autenticazione -->
+            <a href="{{ url_for('main.all_students') }}">mostra studenti</a>
+            <a href="{{ url_for('main.index') }}">Logout</a>
+
+
+            <a href="{{ url_for('main.login') }}">Login</a>
+            <a href="{{ url_for('main.sign') }}">Registrati</a>
+
+    </div>
+
     <hr>
 
     {% block content %}{% endblock %}
