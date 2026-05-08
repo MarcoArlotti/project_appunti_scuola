@@ -85,8 +85,12 @@ def crea_account(username, email, password):
     )
     db.commit()
 
-
-def controlla_accesso(username,password_hashed):
-    #STEP 1 controlla se l'account esiste
-    #STEP 2 controlla password guardando se l'account con quel id o nome ha quella password
-    pass
+def controlla_accesso(username,password):
+    db = get_db()
+    query= """
+        SELECT id, username, password_hash
+        FROM students
+        WHERE username = ?
+        """
+    utente = db.execute(query,(username,)).fetchone()
+    return (utente)

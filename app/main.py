@@ -1,9 +1,12 @@
-from flask import Blueprint, flash, redirect, render_template, request, url_for
+from flask import Blueprint, flash, redirect, render_template, request, url_for, session
 from app.repositories.crud import *
+
 bp = Blueprint("main",__name__)
 
 @bp.route("/")
 def index():
+    if 'id' in session:
+        flash(f"BENVENUTO {session["username"]}")
     subjects = get_subjects()
     return render_template("home.html", subjects=subjects)
 
@@ -42,5 +45,18 @@ def sign():
 
 @bp.route("/login")
 def login():
-    controlla_accesso()
+    #FIXARE
+    username = request.form.get('username')
+    password = request.form.get('password_hash')
+
+    utente = controlla_accesso(username,password)
+    if utente:
+        if check_password_hash(utente["password_hashed"], utente["password"]):
+            session['id'] = utente["id"]
+            session['username'] = utente["username"]
+        else:
+            flash("password non valida")
+    else:
+        flash("utente non esiste")
+
     return render_template("login.html")
