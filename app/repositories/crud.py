@@ -1,5 +1,9 @@
 from app.db import get_db
 import markdown
+
+from flask_login import UserMixin
+from werkzeug.security import generate_password_hash, check_password_hash
+
 def crea(dato1:str):
     db = get_db()
     db.execute(
@@ -69,9 +73,6 @@ def converti_e_prendi_text_data(id):
     note["text_data"] = pagina_html
     return note
 
-from flask_login import UserMixin
-from werkzeug.security import generate_password_hash, check_password_hash
-
 def crea_account(username, email, password):
     db = get_db()
 
@@ -87,10 +88,18 @@ def crea_account(username, email, password):
 
 def controlla_accesso(username,password):
     db = get_db()
-    query= """
+    query = """
         SELECT id, username, password_hash
         FROM students
         WHERE username = ?
         """
     utente = db.execute(query,(username,)).fetchone()
     return (utente)
+
+
+def crea_note(text_data, title, data_upload, student_id, subject_id):
+    db = get_db()
+    db.execute(
+        """INSERT INTO notes (text_data, title, data_upload, student_id, subject_id) VALUES (?,?,?,?,?)""",
+        (text_data, title, data_upload, student_id, subject_id)
+    )

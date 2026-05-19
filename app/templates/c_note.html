@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h1>Crea una nuova nota</h1>
+
+<form id="c_note" method="post" enctype="multipart/form-data">
+    <label for="title">Title:</label>
+    <br>
+    <input type="text" id="title" name="title">
+    <br>
+
+    <label for="subject">subject:</label>
+    <br>
+    <select id="subject">
+        {% for subject in subjects %}
+            <option value="{{ subject.id }}" >{{ subject.value }}</option> DA FARE
+        {% endfor %}
+    </select>
+
+    <br>
+
+    <label for="file">File:</label>
+    <br>
+    <input type="file" id="file" name="file" >
+
+    <button type="submit">crea</button>   
+</form>
+
+{% endblock %}

@@ -10,19 +10,19 @@
     </style>
 </head>
 <body>
-    <div>
-        <a href="{{ url_for('main.index') }}">Home</a>
-
-        <!-- da mettere il controllo della autenticazione -->
-            <a href="{{ url_for('main.all_students') }}">mostra studenti</a>
-            <a href="{{ url_for('main.index') }}">Logout</a>
-
-
-            <a href="{{ url_for('main.login') }}">Login</a>
-            <a href="{{ url_for('main.sign') }}">Registrati</a>
-
-    </div>
-
+<table border="1" cellpadding="10" cellspacing="0" style="border-color:#4b0070; margin-bottom:20px;">
+    <tr>
+        <td><a href="{{ url_for('main.index') }}">Home</a></td>
+        <td><a href="{{ url_for('main.all_students') }}">Mostra studenti</a></td>
+        <td><a href="{{ url_for('main.logout') }}">Logout</a></td>
+        <td><a href="{{ url_for('main.login') }}">Login</a></td>
+        <td><a href="{{ url_for('main.sign') }}">Registrati</a></td>
+        <td><a href="{{ url_for('main.c_note') }}">Crea Nota</a></td>
+    </tr>
+</table>
+    {% if username %}
+        <p>BENVENUTO: {{username}}</p>
+    {% endif %}
     <hr>
 
     {% block content %}{% endblock %}
