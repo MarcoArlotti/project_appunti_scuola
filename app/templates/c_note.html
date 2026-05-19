@@ -11,9 +11,11 @@
 
     <label for="subject">subject:</label>
     <br>
-    <select id="subject">
+    <select id="subject" name="subject">
         {% for subject in subjects %}
-            <option value="{{ subject.id }}" >{{ subject.value }}</option> DA FARE
+            <option value="{{ subject.id }}">
+                {{ subject.nome_materia }}
+            </option>
         {% endfor %}
     </select>
 

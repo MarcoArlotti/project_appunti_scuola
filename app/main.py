@@ -77,7 +77,8 @@ def errore():
 def c_note():
     if request.method == "GET":
         if session:
-            return render_template("c_note.html")
+            subjects = get_subjects()
+            return render_template("c_note.html", subjects=subjects)
         else:
             return redirect(url_for("main.login"))
         
@@ -94,5 +95,5 @@ def c_note():
         student_id = session["id"]
         subject_id = request.form.get('subject')
         
-        crea_note(text_data, title, data_upload, student_id, subject_id) #tails
-    return redirect(url_for("main.specific_note", id={}))
+        id_post_creato = crea_note(text_data, title, data_upload, student_id, subject_id) #tails
+        return redirect(url_for("main.specific_note", id=id_post_creato))

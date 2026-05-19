@@ -99,7 +99,17 @@ def controlla_accesso(username,password):
 
 def crea_note(text_data, title, data_upload, student_id, subject_id):
     db = get_db()
-    db.execute(
-        """INSERT INTO notes (text_data, title, data_upload, student_id, subject_id) VALUES (?,?,?,?,?)""",
+
+    cursor = db.execute(
+        """INSERT INTO notes 
+        (text_data, title, data_upload, student_id, subject_id) 
+        VALUES (?,?,?,?,?)""",
         (text_data, title, data_upload, student_id, subject_id)
     )
+
+    db.commit()
+
+    note_id = cursor.lastrowid
+    return note_id
+
+    
