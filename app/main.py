@@ -10,7 +10,8 @@ def index():
     else:
         username = None
     subjects = get_subjects()
-    return render_template("home.html", subjects=subjects,username=username)
+    notes = get_all_notes()
+    return render_template("home.html", subjects=subjects,username=username, notes=notes)
 
 @bp.route("/students")
 def all_students():
@@ -20,7 +21,8 @@ def all_students():
 @bp.route("/students/<int:id>")
 def specific_student(id):
     student = user_by_id(id)
-    return render_template("student_page.html", student=student)
+    files_created = get_notes_by_user(id)
+    return render_template("student_page.html", student=student, files_created=files_created)
 
 @bp.route("/subjects/<int:id>")
 def notes_by_subject(id):

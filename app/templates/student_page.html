@@ -2,10 +2,22 @@
 
 {% block content %}
 {% if student %}
-    <div>
-        student name: {{ student.username }} <br>
-        data iscrizione: {{ student.data_iscrizione }}
+    <h1>Student page</h1>
+    <hr>
+    <h2>Student name: {{ student.username }}</h2>
+    <h2>Account created: {{ student.data_iscrizione }}</h2>
+    <hr>
+    <!-- METTERE UN BLUEPRINT DELLE NOTE-->
+     <h2>Notes Created:</h2>
+     {% for note in files_created %}
+
+    <div class="arlo"> 
+        <p>note title:<a href="{{ url_for('main.specific_note', id=note.id) }}"> {{note.title}}</a></p>
+        {{ note.data_upload }}<br>
     </div>
+    <hr>
+     {% endfor %}
+    <!---->
 {% else %}
     <h1>studente non trovato 404</h1>
 {%endif%}

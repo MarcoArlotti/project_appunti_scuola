@@ -1,14 +1,36 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<h1>Home</h1>
+<h1>HOMEPAGE</h1>
 
-{% for subject in subjects %}
-    <div>
-    <a href="{{ url_for('main.notes_by_subject', id=subject['id']) }}">
-    {{ subject['nome_materia'] }}
-    </a>
+<h4>Filter settings</h4>
+<form id="ricerca">
+    <label for="title">by note:</label>
+    <input name="title" placeholder="insert title">
+    
+    <label for="title">by subject:</label>
+    <input name="title" placeholder="insert title">
+
+    <label for="author">by author:</label>
+    <input name="author" placeholder="insert author name">
+
+    <label for="data_from">from:</label>
+    <input type="date" name="data_from">
+
+    <label for="data_to">to:</label>
+    <input type="date" name="data_to">
+
+    <button type="submit" id="filter">Filter by</button>
+</form>
+<hr>
+{% for note in notes %}
+    <div> 
+        <p>author:<a href="{{ url_for('main.specific_student', id=note.student_id) }}"> {{note.username}}</a></p>
+        <p>note title:<a href="{{ url_for('main.specific_note', id=note.id) }}"> {{note.title}}</a></p>
+        {{ note.data_upload }}<br>
     </div>
+    <hr>
+
 {% endfor %}
 
 {% endblock %}

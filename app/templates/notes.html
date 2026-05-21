@@ -2,13 +2,15 @@
 
 {% block content %}
 <h1>Notes for <i>{{ notes[0].nome_materia}}</i></h1>
-
+<hr>
 {% for note in notes %}
-    <div>
-        <a href="{{ url_for('main.specific_student', id=note.id) }}">{{note.username}}</a><br><br>
-        {{ note.title }}<br>
+
+    <div class="arlo"> 
+        <p>author:<a href="{{ url_for('main.specific_student', id=note.student_id) }}"> {{note.username}}</a></p>
+        <p>note title:<a href="{{ url_for('main.specific_note', id=note.id) }}"> {{note.title}}</a></p>
         {{ note.data_upload }}<br>
     </div>
+    <hr>
 
 {% endfor %}
 

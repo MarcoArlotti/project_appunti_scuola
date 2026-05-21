@@ -1,7 +1,44 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<h1>{{ pagina_html.title}}<br></h1>
+
+<h1><b>Note title:</b> <i>{{ pagina_html.title}}</i><br></h1>
+<p><b>Data of creation:</b> <i>{{pagina_html.data_upload}}</i></p>
+<p><b>Author:</b> <i>{{pagina_html.username}}</i></p>
 <hr>
-{{ pagina_html.text_data | safe}}
+<div class="md">
+    {{ pagina_html.text_data | safe }}
+</div>
+
+<script type="module">
+  import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs';
+  
+  // Inizializza mermaid dicendogli di NON fare il parsing automatico all'avvio
+  mermaid.initialize({ startOnLoad: false });
+
+  document.addEventListener("DOMContentLoaded", async () => {
+    // 2. Trova tutti i blocchi di codice generati da markdown che contengono codice mermaid
+    // Il parser di Python di solito genera 'code.language-mermaid' o 'code.mermaid'
+    const codeBlocks = document.querySelectorAll('pre code.language-mermaid, pre code.mermaid');
+
+    for (const codeBlock of codeBlocks) {
+      const preElement = codeBlock.parentElement;
+      const mermaidCode = codeBlock.textContent;
+
+      // 3. Crea un div contenitore che sostituirà il vecchio blocco di codice
+      const container = document.createElement('div');
+      container.className = 'mermaid';
+      container.textContent = mermaidCode;
+
+      // Sostituisci il <pre><code> con il nuovo <div> pronto per Mermaid
+      preElement.parentNode.insertBefore(container, preElement);
+      preElement.remove();
+    }
+
+    // 4. Avvia il rendering di tutti i div con classe 'mermaid'
+    await mermaid.run();
+  });
+</script>
+</script>
+
 {% endblock %}

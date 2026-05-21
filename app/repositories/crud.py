@@ -24,6 +24,7 @@ def ottieni_dati():
     dati = db.execute(query).fetchall()
     return [dict(dato) for dato in dati]
 
+
 def get_all_students():
     db = get_db()
     query = """SELECT * FROM students"""
@@ -36,11 +37,27 @@ def get_subjects():
     subjects = db.execute(query).fetchall()
     return [dict(subject) for subject in subjects]
 
+def get_all_notes():
+    db = get_db()
+    query = """SELECT * FROM notes
+                ORDER BY notes.data_upload ASC;"""
+    notes = db.execute(query,).fetchall()
+    return [dict(note) for note in notes]
+
 def get_notes_by_subject(id):
     db = get_db()
     query = """SELECT * FROM notes
                 JOIN subjects ON notes.subject_id = subjects.id 
                 JOIN students ON notes.student_id = students.id WHERE subject_id = ?;"""
+    notes = db.execute(query, (id,)).fetchall()
+    return [dict(note) for note in notes]
+
+def get_notes_by_user(id):
+    db = get_db()
+    query = """SELECT * FROM notes
+                JOIN subjects ON notes.subject_id = subjects.id 
+                WHERE student_id = ?
+                ORDER BY notes.subject_id;"""
     notes = db.execute(query, (id,)).fetchall()
     return [dict(note) for note in notes]
 
@@ -62,14 +79,27 @@ def aggiorna(id,nuovo_valore):
     db.commit()
 
 
+import re
+import markdown
+
 def converti_e_prendi_text_data(id):
     db = get_db()
-    query = """SELECT * FROM notes
-                WHERE notes.id = ?;"""
+    query = """SELECT * FROM notes JOIN students ON notes.student_id = students.id WHERE notes.id = ?;"""
     note_query = db.execute(query, (id,)).fetchone()
     note = dict(note_query)
-    pagina = note["title"]
+    
+    pagina = note["text_data"]
     pagina_html = markdown.markdown(pagina, extensions=['fenced_code', 'tables'])
+    
+    # Sostituisce <pre><code class="language-mermaid">...</code></pre> 
+    # con un più pulito <div class="mermaid">...</div> che Mermaid.js adora.
+    pagina_html = re.sub(
+        r'<pre><code class="language-mermaid">(.*?)</code></pre>', 
+        r'<div class="mermaid">\1</div>', 
+        pagina_html, 
+        flags=re.DOTALL
+    )
+    
     note["text_data"] = pagina_html
     return note
 

@@ -3,16 +3,55 @@
 <head>
     <title>Appunti</title>
     <style>
-    div {
-        border: 1px solid #aa00ff;
-        margin-bottom: 10px;
-    }
-    hr {
-        border-color: rgb(81, 0, 97);
-    }
-    nav {
-        position: relative;
-    }
+        .md {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+            font-size: 16px;
+            line-height: 1.5;
+            color: #000000;
+            max-width: 4000px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        /* Stile per i titoli */
+        .md h1, .md h2, .md h3 {
+            margin-top: 20px;
+            margin-bottom: 20px;
+            font-weight: 800;
+            line-height: 1.25;
+            border-bottom: 5px solid #48006a;
+            padding-bottom: 0.em;
+        }
+
+        /* Stile per il codice (visto che usi 'fenced_code') */
+        .md pre {
+            padding: 16px;
+            background-color: #000000;
+            border-radius: 6px;
+            overflow: auto;
+            color: #ffffff;
+        }
+        .md code {
+            font-family: ui-monospace, SFMono-Regular, SF Pro Text, monospace;
+            font-size: 85%;
+        }
+
+        /* Stile per le tabelle (visto che usi 'tables') */
+        .md table {
+            border-spacing: 0;
+            border-collapse: collapse;
+            margin-top: 0;
+            margin-bottom: 16px;
+        }
+        /* tabelle */
+        .md th, .md td {
+            padding: 6px 13px;
+            border: 3px solid #7f5281;
+        }
+        .md tr:nth-child(2n) {
+            color: #ffffff;
+            background-color: #000000;
+        }
     </style>
 </head>
 <body>

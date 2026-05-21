@@ -22,14 +22,14 @@ CREATE TABLE students (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
     username VARCHAR(100) NOT NULL UNIQUE,
     email VARCHAR(30) NOT NULL UNIQUE,
-    password_hash VARCHAR(255) NOT NULL,
+    password_hash VARCHAR(162) NOT NULL,
     data_iscrizione DATETIME DEFAULT CURRENT_TIMESTAMP
 );
 
 -- Tabella materie
 CREATE TABLE subjects (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
-    nome_materia VARCHAR(100) NOT NULL UNIQUE
+    nome_materia VARCHAR(30) NOT NULL UNIQUE
 );
 
 -- Sistema rating
