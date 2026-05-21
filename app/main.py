@@ -3,14 +3,26 @@ from app.repositories.crud import *
 from datetime import datetime
 bp = Blueprint("main",__name__)
 
-@bp.route("/")
+@bp.route("/", methods=["GET","POST"])
 def index():
     if 'username' in session:
         username = session["username"]
     else:
         username = None
+
     subjects = get_subjects()
-    notes = get_all_notes()
+
+    if request.method == "GET":
+        notes = get_all_notes()
+
+    if request.method == "POST":
+        title = request.form.get('title')
+        author = request.form.get('author')
+        data_from = request.form.get('data_from')
+        data_to = request.form.get('data_to')
+        subject_id = request.form.get('subject_id')
+        
+        notes = filtra(title,author,data_from,data_to,subject_id)
     return render_template("home.html", subjects=subjects,username=username, notes=notes)
 
 @bp.route("/students")
@@ -87,7 +99,6 @@ def c_note():
     if request.method == "POST":
         title = request.form.get('title')
         file_grezzo = request.files.get('file')
-        print(file_grezzo)
         if file_grezzo:
             text_data = file_grezzo.read().decode('utf-8')
         else:

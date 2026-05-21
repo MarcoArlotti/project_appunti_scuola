@@ -4,14 +4,9 @@
 <h1>HOMEPAGE</h1>
 
 <h4>Filter settings</h4>
-<form id="ricerca">
-    <label for="title">by note:</label>
-    <input name="title" placeholder="insert title">
-    
-    <label for="title">by subject:</label>
+<form id="ricerca" method="POST">
     <input name="title" placeholder="insert title">
 
-    <label for="author">by author:</label>
     <input name="author" placeholder="insert author name">
 
     <label for="data_from">from:</label>
@@ -19,7 +14,17 @@
 
     <label for="data_to">to:</label>
     <input type="date" name="data_to">
-
+    
+    <label for="subject_id">subject:</label>
+    <select id="subject_id" name="subject_id" >
+        <option value="">
+        </option>
+        {% for subject in subjects %}
+            <option value="{{ subject.id }}">
+                {{ subject.nome_materia }}
+            </option>
+        {% endfor %}
+    </select>
     <button type="submit" id="filter">Filter by</button>
 </form>
 <hr>

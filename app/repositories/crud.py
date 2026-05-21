@@ -78,6 +78,51 @@ def aggiorna(id,nuovo_valore):
     db.execute(query, (nuovo_valore, id))
     db.commit()
 
+def filtra(title,author,data_from,data_to,subject_id):
+
+    query = """
+        SELECT 
+            notes.id,
+            notes.student_id,
+            notes.title,
+            notes.text_data,
+            notes.data_upload,
+            students.username,
+            subjects.nome_materia
+        FROM notes
+        JOIN students ON notes.student_id = students.id
+        JOIN subjects ON notes.subject_id = subjects.id
+        """
+    conditions = []
+    values = []
+
+    if title:
+        conditions.append("notes.title LIKE ?")
+        values.append(f"%{title}%")
+
+    if author:
+        conditions.append("students.username LIKE ?")
+        values.append(f"%{author}%")
+
+    if data_from:
+        conditions.append("notes.data_upload >= ?")
+        values.append(data_from)
+
+    if data_to:
+        conditions.append("notes.data_upload <= ?")
+        values.append(data_to)
+
+    if not subject_id == "":
+        conditions.append("notes.subject_id = ?")
+        values.append(subject_id)
+
+    if conditions:
+        query += " WHERE " + " AND ".join(conditions)
+    
+    db = get_db() 
+
+    results = db.execute(query, values).fetchall()
+    return results
 
 import re
 import markdown
@@ -91,8 +136,6 @@ def converti_e_prendi_text_data(id):
     pagina = note["text_data"]
     pagina_html = markdown.markdown(pagina, extensions=['fenced_code', 'tables'])
     
-    # Sostituisce <pre><code class="language-mermaid">...</code></pre> 
-    # con un più pulito <div class="mermaid">...</div> che Mermaid.js adora.
     pagina_html = re.sub(
         r'<pre><code class="language-mermaid">(.*?)</code></pre>', 
         r'<div class="mermaid">\1</div>', 
