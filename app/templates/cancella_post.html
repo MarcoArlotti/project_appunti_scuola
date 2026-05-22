@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+{% block content %}
+<h1>Cancella un post</h1>
+
+{% for note in notes %}
+
+    <div class="arlo"> 
+        <p>author: {{note.username}}</p>
+        <p>note title:<a href="{{ url_for('main.specific_note', id=note.id) }}"> {{note.title}}</a></p>
+        {{ note.data_upload }}<br><br>
+        <a href="{{ url_for('main.delete_post', id=note.id) }}">CANCELLA POST</a>
+    </div>
+    <hr>
+
+{% endfor %}
+{% endblock %}

@@ -4,19 +4,15 @@ import markdown
 from flask_login import UserMixin
 from werkzeug.security import generate_password_hash, check_password_hash
 
-def crea(dato1:str):
-    db = get_db()
-    db.execute(
-        """INSERT INTO tabella (dato1) VALUES (?)""",(dato1,)
-    )
-    db.commit()
 
-def cancella(id:int):
-    db = get_db()
-    db.execute(
-        """DELETE FROM tabella WHERE id = ?""",(id,)
-    )
-    db.commit()
+def cancella_post(notes,session):
+    if session and session["id"] == notes["student_id"]:
+        id = notes["id"]
+        db = get_db()
+        db.execute(
+            """DELETE FROM notes WHERE notes.id = ?""",(id,)
+        )
+        db.commit()
 
 def ottieni_dati():
     db = get_db()
@@ -127,23 +123,29 @@ def filtra(title,author,data_from,data_to,subject_id):
 import re
 import markdown
 
-def converti_e_prendi_text_data(id):
+def converti_e_prendi_text_data(id,convert):
     db = get_db()
-    query = """SELECT * FROM notes JOIN students ON notes.student_id = students.id WHERE notes.id = ?;"""
+    if convert:
+        query = """SELECT * FROM notes JOIN students ON notes.student_id = students.id WHERE notes.id = ?;"""
+    elif not convert:
+        query = """SELECT * FROM notes WHERE notes.id = ?;"""
     note_query = db.execute(query, (id,)).fetchone()
+    
     note = dict(note_query)
-    
-    pagina = note["text_data"]
-    pagina_html = markdown.markdown(pagina, extensions=['fenced_code', 'tables'])
-    
-    pagina_html = re.sub(
-        r'<pre><code class="language-mermaid">(.*?)</code></pre>', 
-        r'<div class="mermaid">\1</div>', 
-        pagina_html, 
-        flags=re.DOTALL
-    )
-    
-    note["text_data"] = pagina_html
+
+    #per evitare di convertire in ogni caso
+    if convert:
+        pagina = note["text_data"]
+        pagina_html = markdown.markdown(pagina, extensions=['fenced_code', 'tables'])
+
+        pagina_html = re.sub(
+            r'<pre><code class="language-mermaid">(.*?)</code></pre>', 
+            r'<div class="mermaid">\1</div>', 
+            pagina_html, 
+            flags=re.DOTALL
+        )
+
+        note["text_data"] = pagina_html
     return note
 
 def crea_account(username, email, password):

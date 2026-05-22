@@ -43,7 +43,7 @@ def notes_by_subject(id):
 
 @bp.route("/notes/<int:id>")
 def specific_note(id):
-    pagina_html = converti_e_prendi_text_data(id)
+    pagina_html = converti_e_prendi_text_data(id,convert=True)
     return render_template("specific_note.html", pagina_html=pagina_html)
 
 
@@ -110,3 +110,23 @@ def c_note():
         
         id_post_creato = crea_note(text_data, title, data_upload, student_id, subject_id) #tails
         return redirect(url_for("main.specific_note", id=id_post_creato))
+    
+@bp.route("/cancella")
+def delete():
+    if session:
+        id = session["id"]
+        notes = get_notes_by_user(id)
+        return render_template("cancella_post.html", notes=notes)
+    else:
+        return redirect(url_for("main.login"))
+
+
+@bp.route("/cancella/<int:id>")
+def delete_post(id):
+    if session:
+        notes_scelta = converti_e_prendi_text_data(id,convert=False)
+        cancella_post(notes_scelta,session)
+
+        return redirect(url_for("main.delete"))
+    else:
+        return redirect(url_for("main.login"))
