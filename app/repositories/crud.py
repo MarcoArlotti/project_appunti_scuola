@@ -33,6 +33,25 @@ def get_subjects():
     subjects = db.execute(query).fetchall()
     return [dict(subject) for subject in subjects]
 
+def aggiungi_subject(materia):
+    materia = materia.upper()
+    materia = materia.strip()
+    try:
+        db = get_db()
+        db.execute(
+            "INSERT INTO subjects (nome_materia) VALUES (?)",
+            (materia,)
+        )
+        db.commit()
+        ris = True
+    except:
+        #TODO
+        db.rollback()
+        ris = False
+    
+    return materia,ris
+
+
 def get_all_notes():
     db = get_db()
     query = """SELECT * FROM notes

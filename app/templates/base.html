@@ -4,6 +4,11 @@
     <title>Appunti</title>
     <style>
         /* ===== DARK MODE MODERNO ===== */
+.viewport-img, img{
+  width: 100vw;  /* Exactly 50% of the browser's width */
+  height: auto;
+}
+
 .navbar{
     position: sticky; /* oppure fixed */
     top: 0;
@@ -43,7 +48,7 @@
     color: #5b8cff;
 }
 :root{
-    --bg-main: #0f1115;
+    --bg-main: #000000;
     --bg-secondary: #1a1d24;
     --bg-card: #20242d;
 
@@ -261,13 +266,14 @@ td, th{
 <header class="navbar">
     <div class="logo"><i>Arlo's site</i></div>
     <nav>
-        <h2><a class="menu" href="{{ url_for('main.index') }}">Home</a></h2>
-        <h2><a class="menu" href="{{ url_for('main.all_students') }}">Mostra studenti</a></h2>
-        <h2><a class="menu" href="{{ url_for('main.logout') }}">Logout</a></h2>
-        <h2><a class="menu" href="{{ url_for('main.login') }}">Login</a></h2>
-        <h2><a class="menu" href="{{ url_for('main.sign') }}">Registrati</a></h2>
-        <h2><a class="menu" href="{{ url_for('main.c_note') }}">Crea Nota</a></h2>
-        <h2><a class="menu" href="{{ url_for('main.delete') }}">cancella un post</a></h2>
+        <h2><a class="menu" href="{{ url_for('main.flexare') }}">ABOUT ME</a></h2>
+        <h2><a class="menu" href="{{ url_for('main.index') }}">HOME</a></h2>
+        <h2><a class="menu" href="{{ url_for('main.all_students') }}">MOSTRA STUDENTI</a></h2>
+        <h2><a class="menu" href="{{ url_for('main.logout') }}">LOGOUT</a></h2>
+        <h2><a class="menu" href="{{ url_for('main.login') }}">LOGIN</a></h2>
+        <h2><a class="menu" href="{{ url_for('main.sign') }}">REGISTRATI</a></h2>
+        <h2><a class="menu" href="{{ url_for('main.c_note') }}">CREA NOTA</a></h2>
+        <h2><a class="menu" href="{{ url_for('main.delete') }}">CANCELLA POST</a></h2>
     </nav>
 </header>
 </table>
@@ -277,6 +283,11 @@ td, th{
     <hr>
 
     {% block content %}{% endblock %}
+    <br>
+    <br>
+    <br>
+    <hr>
+
 <b><i><footer>Arlotti Marco's site ™ | Arlo's ™ | 5M | all right reserved 2026</footer></i></b>
 </body>
 </html>

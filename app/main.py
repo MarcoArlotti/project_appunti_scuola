@@ -25,6 +25,9 @@ def index():
         notes = filtra(title,author,data_from,data_to,subject_id)
     return render_template("home.html", subjects=subjects,username=username, notes=notes)
 
+@bp.route("/about")
+def flexare():
+    return render_template("flexare.html")
 @bp.route("/students")
 def all_students():
     students = get_all_students()
@@ -97,6 +100,13 @@ def c_note():
             return redirect(url_for("main.login"))
         
     if request.method == "POST":
+        
+        materia = request.form.get('aggiugi_subject')
+        if materia:
+            materia,ris = aggiungi_subject(materia)
+            return redirect(url_for("main.c_note"))
+
+
         title = request.form.get('title')
         file_grezzo = request.files.get('file')
         if file_grezzo:
