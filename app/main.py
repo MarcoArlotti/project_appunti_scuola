@@ -11,9 +11,7 @@ def index():
         username = None
 
     subjects = get_subjects()
-
-    if request.method == "GET":
-        notes = get_all_notes()
+    notes = get_all_notes()
 
     if request.method == "POST":
         title = request.form.get('title')
@@ -23,6 +21,7 @@ def index():
         subject_id = request.form.get('subject_id')
         
         notes = filtra(title,author,data_from,data_to,subject_id)
+        
     return render_template("home.html", subjects=subjects,username=username, notes=notes)
 
 @bp.route("/about")

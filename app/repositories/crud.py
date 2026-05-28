@@ -55,6 +55,7 @@ def aggiungi_subject(materia):
 def get_all_notes():
     db = get_db()
     query = """SELECT * FROM notes
+                JOIN students ON notes.student_id = students.id
                 ORDER BY notes.data_upload ASC;"""
     notes = db.execute(query,).fetchall()
     return [dict(note) for note in notes]
@@ -70,7 +71,8 @@ def get_notes_by_subject(id):
 def get_notes_by_user(id):
     db = get_db()
     query = """SELECT * FROM notes
-                JOIN subjects ON notes.subject_id = subjects.id 
+                JOIN subjects ON notes.subject_id = subjects.id
+                JOIN students ON notes.student_id = students.id 
                 WHERE student_id = ?
                 ORDER BY notes.subject_id;"""
     notes = db.execute(query, (id,)).fetchall()
