@@ -7,6 +7,6 @@ app = create_app()
 
 # Se questo file viene eseguito direttamente (non importato), avvia il server
 if __name__ == "__main__":
-    app.run(debug=True)
+    app.run()
 
 # Set-ExecutionPolicy Unrestricted -Scope CurrentUser

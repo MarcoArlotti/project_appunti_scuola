@@ -1,4 +1,13 @@
 # Resoconto finale del progetto finale
+## runnare il progetto
+l'app usa usa gunicorn come wsgi quindi:
+1. installare i requirements
+2. runnare gunicorn
+``` python
+gunicorn -w 4 -b 127.0.0.1:8000 wsgi:app
+curl http://127.0.0.1:8000
+```
+
 
 Questo progetto mi ha istruito su come gestire le tempistiche durante i tempi stretti,
 
