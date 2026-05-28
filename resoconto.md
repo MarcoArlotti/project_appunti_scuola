@@ -28,3 +28,5 @@ Anche se il progetto e' finito in ritardo sono soddisfatto di come e' venuto, pe
 IL progetto e' stato sviluppato senza l'uso pesante di AI, ma proprio grazie ad essa sono riuscito a capire immediatamnte dove il programma aveva degli errori.
 
 Senza l'uso delle varie AI il progetto sarebbe durato molto piu' tempo.
+
+Per vedere il sito web aprire la pagina: [SITO WEB](https://project-appunti-scuola.onrender.com/)
