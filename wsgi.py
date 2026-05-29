@@ -1,12 +1,18 @@
-# Importiamo la funzione create_app dal pacchetto 'app'
-# Questo è possibile perché 'app' ha un file __init__.py!
-from app import create_app
+import os
+from flask import Flask
+from flask_sqlalchemy import SQLAlchemy
 
-# Chiamiamo la fabbrica per ottenere l'applicazione
-app = create_app()
+app = Flask(__name__)
 
-# Se questo file viene eseguito direttamente (non importato), avvia il server
-if __name__ == "__main__":
-    app.run()
+# Render fornisce l'URL del database. Python si aspetta 'postgresql://' 
+# ma a volte Render usa 'postgres://'. Questo trick corregge l'URL automaticamente.
+db_url = os.environ.get('postgresql://test_wcsb_user:7eAV929bNJX50dROa7TlXU7PN6RChFIP@dpg-d8cj5oreo5us73ev43cg-a/test_wcsb')
+if db_url and db_url.startswith("postgres://"):
+    db_url = db_url.replace("postgres://", "postgresql://", 1)
 
-# Set-ExecutionPolicy Unrestricted -Scope CurrentUser
+app.config['SQLALCHEMY_DATABASE_URI'] = db_url
+app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+
+db = SQLAlchemy(app)
+
+# Da qui in poi definisci i tuoi modelli o gestisci l'app...
