@@ -5,14 +5,38 @@ from flask_login import UserMixin
 from werkzeug.security import generate_password_hash, check_password_hash
 
 
-def cancella_post(notes,session):
-    if session and session["id"] == notes["student_id"]:
-        id = notes["id"]
-        db = get_db()
-        db.execute(
-            """DELETE FROM notes WHERE notes.id = ?""",(id,)
-        )
-        db.commit()
+#def cancella_post(notes,session):
+#    if session and session["id"] == notes["student_id"]:
+#        id = notes["id"]
+#        db = get_db()
+#        db.execute(
+#            """DELETE FROM notes WHERE notes.id = ?""",(id,)
+#        )
+#        db.commit()
+# ==========================================
+# DELETE NOTE
+# ==========================================
+
+#def cancella_post(note, session):
+#    if session and session["id"] == note.student_id:
+#        db.session.delete(note)
+#        db.session.commit()
+
+# ==========================================
+# SUBJECTS
+# ==========================================
+
+def get_subjects():
+    subjects = Subject.query.all()
+
+    return [
+        {
+            "id": subject.id,
+            "nome_materia": subject.nome_materia
+        }
+        for subject in subjects
+    ]
+
 
 def ottieni_dati():
     db = get_db()
@@ -21,11 +45,30 @@ def ottieni_dati():
     return [dict(dato) for dato in dati]
 
 
+#def get_all_students():
+#    db = get_db()
+#    query = """SELECT * FROM students"""
+#    dati = db.execute(query).fetchall()
+#    return [dict(dato) for dato in dati]
+
+# ==========================================
+# STUDENTS
+# ==========================================
+
 def get_all_students():
-    db = get_db()
-    query = """SELECT * FROM students"""
-    dati = db.execute(query).fetchall()
-    return [dict(dato) for dato in dati]
+    students = Student.query.all()
+
+    return [
+        {
+            "id": student.id,
+            "username": student.username,
+            "email": student.email,
+            "password_hash": student.password_hash,
+            "data_iscrizione": student.data_iscrizione
+        }
+        for student in students
+    ]
+
 
 def get_subjects():
     db = get_db()
@@ -33,22 +76,39 @@ def get_subjects():
     subjects = db.execute(query).fetchall()
     return [dict(subject) for subject in subjects]
 
+#def aggiungi_subject(materia):
+#    materia = materia.upper()
+#    materia = materia.strip()
+#    try:
+#        db = get_db()
+#        db.execute(
+#            "INSERT INTO subjects (nome_materia) VALUES (?)",
+#            (materia,)
+#        )
+#        db.commit()
+#        ris = True
+#    except:
+#        db.rollback()
+#        ris = False
+#    
+#    return materia,ris
+#
 def aggiungi_subject(materia):
-    materia = materia.upper()
-    materia = materia.strip()
+    materia = materia.upper().strip()
+
     try:
-        db = get_db()
-        db.execute(
-            "INSERT INTO subjects (nome_materia) VALUES (?)",
-            (materia,)
-        )
-        db.commit()
-        ris = True
-    except:
-        db.rollback()
-        ris = False
-    
-    return materia,ris
+        subject = Subject(nome_materia=materia)
+
+        db.session.add(subject)
+        db.session.commit()
+
+        return materia, True
+
+    except Exception as e:
+        db.session.rollback()
+        print(e)
+
+        return materia, False
 
 
 def get_all_notes():
@@ -76,12 +136,15 @@ def get_notes_by_user(id):
                 ORDER BY notes.subject_id;"""
     notes = db.execute(query, (id,)).fetchall()
     return [dict(note) for note in notes]
+#
+#def user_by_id(id):
+#    db = get_db()
+#    query = """SELECT * FROM students WHERE id = ?"""
+#    dati = db.execute(query, (id,)).fetchone()
+#    return dati
 
 def user_by_id(id):
-    db = get_db()
-    query = """SELECT * FROM students WHERE id = ?"""
-    dati = db.execute(query, (id,)).fetchone()
-    return dati
+    return Student.query.get(id)
 
 def aggiorna(id,nuovo_valore):
     db = get_db()
@@ -168,18 +231,30 @@ def converti_e_prendi_text_data(id,convert):
         note["text_data"] = pagina_html
     return note
 
-def crea_account(username, email, password):
-    db = get_db()
+#def crea_account(username, email, password):
+#    db = get_db()
+#
+#    password_cifrato = generate_password_hash(password)
+#
+#    print(f"USERNAME{username}, EMAIL{email}, PASSWORD{password_cifrato}")
+#
+#    db.execute(
+#        "INSERT INTO students (username, email, password_hash) VALUES (?,?,?)",
+#        (username, email, password_cifrato)
+#    )
+#    db.commit()
 
+def crea_account(username, email, password):
     password_cifrato = generate_password_hash(password)
 
-    print(f"USERNAME{username}, EMAIL{email}, PASSWORD{password_cifrato}")
-
-    db.execute(
-        "INSERT INTO students (username, email, password_hash) VALUES (?,?,?)",
-        (username, email, password_cifrato)
+    student = Student(
+        username=username,
+        email=email,
+        password_hash=password_cifrato
     )
-    db.commit()
+
+    db.session.add(student)
+    db.session.commit()
 
 def controlla_accesso(username,password):
     db = get_db()
