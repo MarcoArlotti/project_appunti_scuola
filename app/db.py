@@ -1,6 +1,9 @@
 import sqlite3
 from flask import current_app, g
+from flask_sqlalchemy import SQLAlchemy
 
+# Creiamo l'istanza di SQLAlchemy senza passargli l'app
+db = SQLAlchemy()
 
 def get_db():
     """Restituisce la connessione al database per la richiesta corrente."""
@@ -25,4 +28,4 @@ def close_db(e=None):
 def init_app(app):
     """Registra la funzione di chiusura automatica."""
     # Dice a Flask: "Quando hai finito di caricare la pagina, chiudi sempre il DB"
-    app.teardown_appcontext(close_db)
+    db.init_app(app)
