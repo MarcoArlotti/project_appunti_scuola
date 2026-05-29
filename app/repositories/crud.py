@@ -45,6 +45,7 @@ def aggiungi_subject(materia):
         db.commit()
         ris = True
     except:
+        #TODO
         db.rollback()
         ris = False
     
