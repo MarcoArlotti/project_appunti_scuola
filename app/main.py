@@ -198,10 +198,9 @@ def sign():
     if request.method == "POST":
         username = request.form.get('username')
         email = request.form.get('email')
-        # NOTA: Naming inconsistency nel form (invii password_hash ma l'utente digita la password in chiaro)
-        password_in_chiaro = request.form.get('password_hash') or request.form.get('password')
+        password_hash = request.form.get('password_hash')
 
-        crea_account(username, email, password_in_chiaro)
+        crea_account(username, email, password_hash)
         return redirect(url_for("main.login"))
     return render_template("sign.html")
 
