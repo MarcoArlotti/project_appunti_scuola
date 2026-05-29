@@ -1,36 +1,32 @@
 import os
 from flask import Flask
-from .db import db
+
 
 def create_app():
+    # 1. Creiamo l'istanza di Flask
+    # instance_relative_config=True dice a Flask:
+    # "Cerca la cartella 'instance' fuori da 'app', non dentro."
     app = Flask(__name__, instance_relative_config=True)
 
-    db_url = os.environ.get(
-        "DATABASE_URL",
-        "sqlite:///test.sqlite"
-    )
-
-    # Fix Render postgres URL
-    if db_url.startswith("postgres://"):
-        db_url = db_url.replace(
-            "postgres://",
-            "postgresql://",
-            1
-        )
-
+    # 2. Configurazione di base
+    # Qui impostiamo le variabili fondamentali.
     app.config.from_mapping(
-        SECRET_KEY=os.environ.get("SECRET_KEY", "dev"),
-        SQLALCHEMY_DATABASE_URI=db_url,
-        SQLALCHEMY_TRACK_MODIFICATIONS=False,
+        # SECRET_KEY serve a Flask per firmare i dati sicuri (es. sessioni).
+        # 'dev' va bene per sviluppare, ma in produzione andrà cambiata.
+        SECRET_KEY="dev",
+        # Diciamo a Flask dove salvare il file del database SQLite
+        DATABASE=os.path.join(app.instance_path, "test.sqlite"),
     )
+
+    # --- AGGIUNGI QUESTO ---
+    from . import db
 
     db.init_app(app)
+    # -----------------------
 
-    with app.app_context():
-        from . import models
-        db.create_all()
+    # --- REGISTRAZIONE BLUEPRINTS ---
+    from . import main
 
-    from .main import bp
-    app.register_blueprint(bp)
+    app.register_blueprint(main.bp)
 
     return app
