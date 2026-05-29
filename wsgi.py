@@ -7,6 +7,9 @@ app = Flask(__name__)
 # 1. Recupera l'URL dalla variabile d'ambiente di Render (senza esporre la password nel codice!)
 db_url = os.environ.get('DATABASE_URL')
 
+
+app.config['SECRET_KEY'] = os.environ.get('SECRET_KEY', 'chiave-segreta-default')
+
 # Correzione del prefisso per Render/SQLAlchemy
 if db_url and db_url.startswith("postgres://"):
     db_url = db_url.replace("postgres://", "postgresql://", 1)
