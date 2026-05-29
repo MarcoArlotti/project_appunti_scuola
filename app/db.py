@@ -10,7 +10,7 @@ def get_db():
     # 'g' è uno zaino temporaneo di Flask.
     # Se la connessione c'è già, la riusiamo. Se no, la creiamo.
     if "db" not in g:
-        g.db = sqlite3.connect(current_app.config["DATABASE"])
+        g.db = sqlite3.connect(current_app.config["DATABASE_URL"])
         # Questa riga serve per poter chiamare le colonne per nome (user['username'])
         g.db.row_factory = sqlite3.Row
 
