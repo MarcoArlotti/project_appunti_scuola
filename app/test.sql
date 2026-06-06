@@ -42,7 +42,7 @@ VALUES
 
 INSERT INTO subjects (nome_materia)
 VALUES
-    ("GPOI"),
+    ("ITALIANO"),
     ("INGLESE"),
     ("SISTEMI E RETI"),
     ("INFORMATICA");
