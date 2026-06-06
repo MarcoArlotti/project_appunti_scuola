@@ -35,10 +35,10 @@ CREATE TABLE subjects (
 
 INSERT INTO students (username, email, password_hash)
 VALUES 
-    ('mario_rossi', 'mario.rossi@example.com', 'hashed_password_1'),
-    ('giulia_bianchi', 'giulia.bianchi@example.com', 'hashed_password_2'),
-    ('lucas_verde', 'lucas.verde@example.com', 'hashed_password_3'),
-    ('anna_gialli', 'anna.gialli@example.com', 'hashed_password_4');
+    ('mario_rossi', 'mario.rossi@example.com', 'scrypt:32768:8:1$8Y9DLmKMqK1ap8YP$738e0dad97a52566541262c6d39e95082c96c7cf8b19df2f7b0dc795a91bfa54be9042b96c775e6295ed758cee77bbbe0a6e6bd8be9ea552411de339ff6cd915'),
+    ('giulia_bianchi', 'giulia.bianchi@example.com', 'scrypt:32768:8:1$8Y9DLmKMqK1ap8YP$738e0dad97a52566541262c6d39e95082c96c7cf8b19df2f7b0dc795a91bfa54be9042b96c775e6295ed758cee77bbbe0a6e6bd8be9ea552411de339ff6cd915'),
+    ('lucas_verde', 'lucas.verde@example.com', 'scrypt:32768:8:1$8Y9DLmKMqK1ap8YP$738e0dad97a52566541262c6d39e95082c96c7cf8b19df2f7b0dc795a91bfa54be9042b96c775e6295ed758cee77bbbe0a6e6bd8be9ea552411de339ff6cd915'),
+    ('anna_gialli', 'anna.gialli@example.com', 'scrypt:32768:8:1$8Y9DLmKMqK1ap8YP$738e0dad97a52566541262c6d39e95082c96c7cf8b19df2f7b0dc795a91bfa54be9042b96c775e6295ed758cee77bbbe0a6e6bd8be9ea552411de339ff6cd915');
 
 INSERT INTO subjects (nome_materia)
 VALUES
