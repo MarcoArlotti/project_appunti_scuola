@@ -101,7 +101,35 @@ Questo è un normale paragrafo di testo per testare il font, l''interlinea e la 
 ### Codice Inline
 Per installare la libreria, usa il comando `npm install markdown-test`.
 
-### Blocco di Codice (Senza evidenziazione)','TEST FUNZIONAMENTO DEL MARKDOWN', 2026-04-12, 1, 1),
+### Blocco di Codice (Senza evidenziazione)
+## gantt del progetto
+
+```mermaid
+gantt
+    title schedule dei tempi stimati per lo sviluppo del progetto - Maggio/Giugno 2026
+    dateFormat  YYYY-MM-DD
+    axisFormat  %y-%m-%d
+    
+    section Analisi Applicazioni (Backend)
+    Salvataggio Classe Computer (Sanchi)       :a2, 2026-05-01, 3d
+    Ottimizzazione & Bug Fix (Monticelli, Rossi) :a3, after a1, 2d
+
+    section Gestione Installazioni (Backend)
+    scansione delle app presenti sul pc (Ponte, Kamil, Sanchi) :b1, 2026-05-04, 9d
+    Ottimizzazione & Bug Fix (Monticelli, Rossi) :b2, after b1, 2d
+    Esecuzione Setup Applicazioni (Ponte, Kamil, Sanchi) :b3, 2026-05-13, 8d
+    Ottimizzazione & Bug Fix (Monticelli, Rossi) :b4, after b3, 2d
+
+    section Interfaccia Grafica (Frontend)
+    Design Struttura UI (Tomasetti, Ivagnes, Uva, Di Luca) :c1, 2026-05-04, 9d
+    Sviluppo UI & Integrazione Backend (Team UI) :c2, 2026-05-13, 8d
+
+    section Revisione e Feedback
+    Report Stato Progetto (Arlotti Marco)      :d1, 2026-05-20, 12d
+    Revisione & Modiche (Mario)     :d2, after d1, 2d
+```
+','TEST DEL MARKDOWN E MERMAID', 2026-04-12, 1, 1),
+
 ('# LE VPN
 Le VPN nascono per collegare piu'' aziende o singoli dipendenti alla rete privata di una sede principale di una azienda proprio come se fossero collegati fisicamente alla rete.
 
